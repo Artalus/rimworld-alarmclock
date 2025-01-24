@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Mod.cs" />
     <Compile Include="src\PatchPlaySettings.cs" />
+    <Compile Include="src\Textures.cs" />
+    <Compile Include="src\TimersListComponent.cs" />
+    <Compile Include="src\TimersListWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
