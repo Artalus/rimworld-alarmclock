@@ -1,3 +1,8 @@
 .vs/
 obj/
+packages/
+
 *.dll
+*.pdb
+
+/Assemblies/0Harmony.xml
