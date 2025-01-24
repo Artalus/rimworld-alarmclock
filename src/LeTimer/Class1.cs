@@ -1,6 +1,13 @@
-﻿namespace LeTimer
+﻿using Verse;
+
+namespace LeTimer
 {
-    public class Class1
+    [StaticConstructorOnStartup]
+    public static class MyMod
     {
+        static MyMod()
+        {
+            Log.Message("Hello World!");
+        }
     }
 }
