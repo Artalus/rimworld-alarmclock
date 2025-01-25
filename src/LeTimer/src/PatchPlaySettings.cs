@@ -8,8 +8,6 @@ namespace LeTimer;
 [HarmonyPatch]
 public static class RimWorld_PlaySettings_DoPlaySettingsGlobalControls
 {
-    private static bool lastOpenState = true;
-
     // the list of gray toggle buttons in bottom-right corner
     [HarmonyPatch(typeof(PlaySettings), nameof(PlaySettings.DoPlaySettingsGlobalControls))]
     [HarmonyPostfix]
@@ -18,28 +16,14 @@ public static class RimWorld_PlaySettings_DoPlaySettingsGlobalControls
         if (worldView || row is null)
             return;
 
-        bool openState = true;
+        var component = Current.Game.GetComponent<TimersListController>();
+        bool openState = component.WindowVisible;
         row.ToggleableIcon(
             ref openState,
             TexturesPlus.ToggleIcon,
             "LeTimer.ToggleWindow".Translate(),
             SoundDefOf.Mouseover_ButtonToggle
         );
-
-        if (openState != lastOpenState)
-        {
-            lastOpenState = openState;
-            // courtesy of simplechecklist
-            var windowPresent = Find.WindowStack.IsOpen(typeof(TimersListWindow));
-            switch (openState)
-            {
-                case true when !windowPresent:
-                    Find.WindowStack.Add(new TimersListWindow());
-                    break;
-                case false when windowPresent:
-                    Find.WindowStack.TryRemove(typeof(TimersListWindow));
-                    break;
-            }
-        }
+        component.ToggleWindow(openState);
     }
 }

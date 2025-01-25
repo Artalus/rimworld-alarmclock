@@ -5,9 +5,12 @@ namespace LeTimer;
 
 public class TimersListWindow : Window
 {
-    public TimersListWindow()
+    TimersListController controller;
+    public TimersListWindow(TimersListController controller)
     {
+        this.controller = controller;
         this.draggable = true;
+        this.forcePause = false;
         this.closeOnAccept = false;
         this.closeOnCancel = false;
         this.closeOnClickedOutside = false;
@@ -21,13 +24,21 @@ public class TimersListWindow : Window
         this.focusWhenOpened = false;
     }
 
+
+    public override Vector2 InitialSize => new(300, 400);
+
     protected override void SetInitialSizeAndPosition()
     {
-        this.windowRect = new Rect(100, 200, 300, 400);
+        this.windowRect = new Rect(
+            controller.WindowX, controller.WindowY,
+            InitialSize.x, InitialSize.y
+        );
     }
 
     public override void DoWindowContents(Rect rect1)
     {
+        // preserve position after drag
+        controller.WindowX = windowRect.position.x;
+        controller.WindowY = windowRect.position.y;
     }
 }
-
