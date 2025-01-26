@@ -5,14 +5,14 @@ namespace LeTimer;
 
 public class TimersListController : GameComponent
 {
-    // simulate LongTick unavailable to GameComponent; 2000/60 ~= 33sec
-    private const int TIMERS_UPDATE_INTERVAL_TICKS = 2000;
+    // simulate LongTick unavailable to GameComponent; 1000/60 ~= 17sec on normal speed
+    private const int TIMERS_UPDATE_INTERVAL_TICKS = 1000;
     private int _nextUpdateTick = 0;
 
     /// <summary>
     /// timers created by user; will be regularly updated
     /// </summary>
-    public List<TimerEntry> Items = [];
+    public List<TimerEntry> Timers = [];
     private TimersListWindow? _window;
 
     /// <summary>
@@ -36,7 +36,7 @@ public class TimersListController : GameComponent
 
     public override void GameComponentTick()
     {
-        var tick = Find.PlayLog!.LastTick;
+        var tick = Ticker.Now;
         if (tick < _nextUpdateTick)
             return;
 
@@ -46,20 +46,21 @@ public class TimersListController : GameComponent
 
     /// <summary>
     /// update all timers, creating notifications and removing expired entries as needed
+    /// </summary>
     private void UpdateTimers(int currentTick)
     {
-        Log.Message($"LeTimer: update @ {currentTick}");
-        foreach (var item in Items)
+        foreach (var timer in Timers)
         {
-            item.UpdateExpirationLabel(currentTick);
-            if (currentTick >= item.CompletesOnTick)
-            {
-                Find.WindowStack.Add(new TimerCompletedWindow(item));
+            timer.UpdateLabels(currentTick);
+            if (timer.Completed)
                 continue;
+            if (currentTick >= timer.CompletesOnTick)
+            {
+                timer.Completed = true;
+                Find.WindowStack.Add(new TimerCompletedWindow(timer));
             }
         }
-        int removed = Items.RemoveAll(x => x.IsExpired());
-        Log.Message($"LeTimer: removed {removed} expired entries");
+        int removed = Timers.RemoveAll(x => x.ShouldExpire());
     }
 
     public bool WindowVisible { get { return _windowVisible; } }
@@ -89,13 +90,50 @@ public class TimersListController : GameComponent
         }
     }
 
+    public void AddNewTimer(string description, int hours)
+    {
+        Timers.Add(new(description, hours));
+        Timers.SortBy(x => x.CompletesOnTick);
+    }
+
+    public void EditTimerAt(int index, string description, int hours)
+    {
+        var x = Timers[index];
+        x.Description = description;
+        x.ResetTime(hours);
+        Timers.SortBy(x => x.CompletesOnTick);
+    }
+
+    public void RemoveTimerAt(int index)
+    {
+        Timers.RemoveAt(index);
+    }
+
+    public override void ExposeData()
+    {
+        Scribe_Collections.Look(ref Timers, "Items", LookMode.Deep, []);
+        Scribe_Values.Look(ref WindowX, "WindowX");
+        Scribe_Values.Look(ref WindowY, "WindowY");
+        Scribe_Values.Look(ref _windowVisible, "WindowVisible");
+        base.ExposeData();
+    }
+
     public override void FinalizeInit()
     {
-        // ChecklistWindow.UpdateItemCount(Items.Count);
+        // entries do not store their labels, so need to reset those
+        // cannot do this right here - map component might not be available - so use queue
+        LongEventHandler.QueueLongEvent(() =>
+        {
+            foreach (var item in Timers)
+            {
+                item.UpdateLabels(Ticker.Now, true);
+            }
+        },
+            "LeTimerLabelsUpdate",
+            doAsynchronously: false,
+            exceptionHandler: null
+        );
         ToggleWindow(_windowVisible);
-        // FIXME: REMOVE for tests only
-        Items.Add(new TimerEntry("test label to check length calculations", 1));
-
         base.FinalizeInit();
     }
 }
