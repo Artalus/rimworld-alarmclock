@@ -52,6 +52,7 @@
     <Compile Include="src\PatchPlaySettings.cs" />
     <Compile Include="src\Ticker.cs" />
     <Compile Include="src\Textures.cs" />
+    <Compile Include="src\Windows.cs" />
     <Compile Include="src\TimerCompletedWindow.cs" />
     <Compile Include="src\TimerEntry.cs" />
     <Compile Include="src\TimersListController.cs" />
