@@ -8,6 +8,8 @@ namespace LeTimer;
 /// </summary>
 public class WindowPlus
 {
+    public const int LABEL_HEIGHT_SM = 22;
+
     public static Vector2 MiddleScreenPos(Rect window)
     {
         return new Vector2(
