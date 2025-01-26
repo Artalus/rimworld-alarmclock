@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mod.cs" />
+    <Compile Include="src\EditEntryWindow.cs" />
     <Compile Include="src\PatchPlaySettings.cs" />
     <Compile Include="src\Ticker.cs" />
     <Compile Include="src\Textures.cs" />

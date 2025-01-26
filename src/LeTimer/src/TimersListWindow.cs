@@ -90,7 +90,7 @@ public class TimersListWindow : Window
             Widgets.Label(r, $"({item.LabelCompletesIn}) {item.Description}".Truncate(windowRect.width - GenUI.Gap * 2));
             if (Widgets.ButtonInvisible(r))
             {
-                // edit entry
+                Find.WindowStack.Add(new EditEntryWindow(controller, index));
             }
         }
         offsetY += entryHeight * controller.Timers.Count;
@@ -108,7 +108,7 @@ public class TimersListWindow : Window
         var btnRect = new Rect(x2, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
         if (Widgets.ButtonImage(btnRect, TexButton.Add, Color.white, tooltip: "Add new timer"))
         {
-            // create new entry
+            Find.WindowStack.Add(new EditEntryWindow(controller, null));
         }
         offsetY += (int)GenUI.SmallIconSize;
     }

@@ -9,6 +9,7 @@ namespace LeTimer;
 public class WindowPlus
 {
     public const int LABEL_HEIGHT_SM = 22;
+    public const int TEXTFIELD_HEIGHT_SM = 34;
 
     public static Vector2 MiddleScreenPos(Rect window)
     {
@@ -35,4 +36,13 @@ public class WindowPlus
         w.windowRect.height = sumHeight;
     }
 
+    /// <summary>
+    /// how much of widgetable space is available to the right of current x-position
+    /// </summary>
+    public static int AvailableWidth(Window w, int offsetX = 0)
+    {
+        // +1 to avoid any single-pixel defects
+        const int HORIZONTAL_MARGIN = (int)GenUI.Gap + 1;
+        return (int)w.windowRect.width - offsetX - HORIZONTAL_MARGIN * 2;
+    }
 }
