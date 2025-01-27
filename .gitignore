@@ -4,5 +4,6 @@ packages/
 
 *.dll
 *.pdb
+*.zip
 
 /Assemblies/0Harmony.xml
