@@ -205,7 +205,7 @@ public class EditEntryWindow : Window
         if (targetEntryIndex.HasValue)
         {
             bool deletePressed = Widgets.ButtonImage(
-                new Rect(x, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize),
+                new Rect(x, y, GenUI.SmallIconSize, GenUI.SmallIconSize),
                 TexButton.Delete,
                 Color.white,
                 tooltip: $"Delete {timerName}"
@@ -220,7 +220,7 @@ public class EditEntryWindow : Window
         }
 
         bool savePressed = Widgets.ButtonImage(
-            new Rect(x, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize),
+            new Rect(x, y, GenUI.SmallIconSize, GenUI.SmallIconSize),
             TexButton.Save,
             mainColor,
             mouseoverColor,
