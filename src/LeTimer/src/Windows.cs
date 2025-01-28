@@ -32,7 +32,6 @@ public class WindowPlus
         // - (0,0) is technically a (17,17)
         // - to draw 20pix height bar, window needs 17+20+17=44 height
         sumHeight += (int)GenUI.Gap * 2;
-        int heightPrev = (int)w.windowRect.height;
         w.windowRect.height = sumHeight;
     }
 

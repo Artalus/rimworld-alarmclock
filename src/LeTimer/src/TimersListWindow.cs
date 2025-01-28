@@ -38,27 +38,20 @@ public class TimersListWindow : Window
     public override void DoWindowContents(Rect rect)
     {
         int offsetY = 0;
-        DoEntriesList(ref offsetY);
-        // skip some space after last entry
-        offsetY += 8;
         HandleButton(ref offsetY);
-        HandleWindowDimensions(offsetY);
+        offsetY += 8;
+        DoEntriesList(ref offsetY);
         WindowPlus.ShrinkWindowHeightToContent(this, offsetY);
+        HandleWindowPosition();
     }
 
     /// <summary>
-    /// adding a new entry heightens window and moves it up a bit, while removing
-    /// shrinks it and moves down - maintaining the "add" button at the very bottom
+    /// ensure window remains on screen at least partially in bottom-right corner
     /// </summary>
-    private void HandleWindowDimensions(int newHeight)
+    private void HandleWindowPosition()
     {
-        int heightDiff = newHeight - (int)windowRect.height;
-        if (Mathf.Abs(heightDiff) <= 0)
-            return;
-
-        var newY = windowRect.position.y - heightDiff;
         // TODO: implement height limits? or just forbid adding new timers if too many?
-        windowRect.position = ClampWindowPosToScreen(windowRect.position.x, newY);
+        windowRect.position = ClampWindowPosToScreen(windowRect.position.x, windowRect.position.y);
 
         // preserve position in the controller, so dragging the window does not
         // reset after it's closed in playsettings
@@ -66,15 +59,13 @@ public class TimersListWindow : Window
         controller.WindowPos = windowRect.position;
     }
 
-    /// <summary>
-    /// ensure window remains on screen at least partially in bottom-right corner
-    /// </summary>
     public static Vector2 ClampWindowPosToScreen(float x, float y)
     {
-        const int SCREEN_MARGIN_LIMIT = 10;
+        const int marginTopLeft = 5;
+        const int marginBottomRight = (int)GenUI.Gap * 3;
         return new(
-            Mathf.Clamp(x, SCREEN_MARGIN_LIMIT, UI.screenWidth - SCREEN_MARGIN_LIMIT * 2),
-            Mathf.Clamp(y, SCREEN_MARGIN_LIMIT, UI.screenHeight - SCREEN_MARGIN_LIMIT * 2)
+            Mathf.Clamp(x, marginTopLeft, UI.screenWidth - marginBottomRight),
+            Mathf.Clamp(y, marginTopLeft, UI.screenHeight - marginBottomRight)
         );
     }
 
@@ -106,18 +97,24 @@ public class TimersListWindow : Window
 
     private void HandleButton(ref int offsetY)
     {
-        float x1 = 0;
+        float x = 0;
         // draw anchor for easier dragging
-        var dragRect = new Rect(x1, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
+        var dragRect = new Rect(x, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
         TooltipHandler.TipRegion(dragRect, "Drag the window");
         GUI.DrawTexture(dragRect, TexturesPlus.DragHandle);
 
-        float x2 = GenUI.SmallIconSize;
-        var btnRect = new Rect(x2, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
+        x += GenUI.SmallIconSize;
+        var btnRect = new Rect(x, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
         if (Widgets.ButtonImage(btnRect, TexButton.Add, Color.white, tooltip: "Add new timer"))
         {
             Find.WindowStack.Add(new EditEntryWindow(controller, null));
         }
+
+        x += 8 + GenUI.SmallIconSize;
+        int w = WindowPlus.AvailableWidth(this, (int)x);
+        var lblRect = new Rect(x, offsetY, w, WindowPlus.LABEL_HEIGHT_SM);
+        Widgets.Label(lblRect, "Timers");
+
         offsetY += (int)GenUI.SmallIconSize;
     }
 }
