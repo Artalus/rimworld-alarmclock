@@ -32,10 +32,7 @@ public class TimersListWindow : Window
 
     protected override void SetInitialSizeAndPosition()
     {
-        this.windowRect = new Rect(
-            controller.WindowX, controller.WindowY,
-            InitialSize.x, InitialSize.y
-        );
+        this.windowRect = new Rect(controller.WindowPos, InitialSize);
     }
 
     public override void DoWindowContents(Rect rect)
@@ -61,13 +58,24 @@ public class TimersListWindow : Window
 
         var newY = windowRect.position.y - heightDiff;
         // TODO: implement height limits? or just forbid adding new timers if too many?
-        windowRect.position = new Vector2(windowRect.position.x, newY);
+        windowRect.position = ClampWindowPosToScreen(windowRect.position.x, newY);
 
         // preserve position in the controller, so dragging the window does not
         // reset after it's closed in playsettings
         // ...if only there was a PostDrag or smth((
-        controller.WindowX = windowRect.position.x;
-        controller.WindowY = windowRect.position.y;
+        controller.WindowPos = windowRect.position;
+    }
+
+    /// <summary>
+    /// ensure window remains on screen at least partially in bottom-right corner
+    /// </summary>
+    public static Vector2 ClampWindowPosToScreen(float x, float y)
+    {
+        const int SCREEN_MARGIN_LIMIT = 10;
+        return new(
+            Mathf.Clamp(x, SCREEN_MARGIN_LIMIT, UI.screenWidth - SCREEN_MARGIN_LIMIT * 2),
+            Mathf.Clamp(y, SCREEN_MARGIN_LIMIT, UI.screenHeight - SCREEN_MARGIN_LIMIT * 2)
+        );
     }
 
     static readonly Color[] _entiresBg = [

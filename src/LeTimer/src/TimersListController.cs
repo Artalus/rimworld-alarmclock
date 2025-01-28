@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace LeTimer;
@@ -23,11 +24,7 @@ public class TimersListController : GameComponent
     /// <summary>
     /// write-only helper for serialization; should never be read outside of ExposeData
     /// </summary>
-    public float WindowX = 100;
-    /// <summary>
-    /// write-only helper for serialization; should never be read outside of ExposeData
-    /// </summary>
-    public float WindowY = 200;
+    public Vector2 WindowPos = new(100, 200);
 
     public TimersListController(Game game)
     {
@@ -112,9 +109,9 @@ public class TimersListController : GameComponent
     public override void ExposeData()
     {
         Scribe_Collections.Look(ref Timers, "Items", LookMode.Deep, []);
-        Scribe_Values.Look(ref WindowX, "WindowX");
-        Scribe_Values.Look(ref WindowY, "WindowY");
+        Scribe_Values.Look(ref WindowPos, "WindowPos");
         Scribe_Values.Look(ref _windowVisible, "WindowVisible");
+        WindowPos = TimersListWindow.ClampWindowPosToScreen(WindowPos.x, WindowPos.y);
         base.ExposeData();
     }
 
