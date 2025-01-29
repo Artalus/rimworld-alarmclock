@@ -21,7 +21,7 @@ public static class RimWorld_PlaySettings_DoPlaySettingsGlobalControls
         row.ToggleableIcon(
             ref openState,
             TexturesPlus.ToggleIcon,
-            "LeTimer.ToggleWindow".Translate(),
+            "Toggle timers window",
             SoundDefOf.Mouseover_ButtonToggle
         );
         component.ToggleWindow(openState);

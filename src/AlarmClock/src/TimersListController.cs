@@ -83,7 +83,7 @@ public class TimersListController : GameComponent
             _window = null;
             bool removed = Find.WindowStack.TryRemove(typeof(TimersListWindow));
             if (!removed)
-                Log.Error("LeTimer: could not remove List window");
+                LogPlus.Error("could not remove List window");
         }
     }
 

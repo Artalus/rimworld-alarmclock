@@ -88,7 +88,7 @@ public class EditEntryWindow : Window
         if (shouldClose)
         {
             if (!Find.WindowStack.TryRemove(this))
-                Log.Error("LeTimer: could not remove EditEntryWindow");
+                LogPlus.Error("could not remove EditEntryWindow");
         }
     }
 
