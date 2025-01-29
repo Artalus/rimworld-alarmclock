@@ -11,5 +11,5 @@ public static class TexturesPlus
     // courtesy of improved workbenches
     public static readonly Texture2D DragHandle = ContentFinder<Texture2D>.Get("UI/Buttons/DragHash", true);
 
-    public static readonly Texture2D ToggleIcon = ContentFinder<Texture2D>.Get("LeTimer/SettingsToggleIcon");
+    public static readonly Texture2D ToggleIcon = ContentFinder<Texture2D>.Get("AlarmClock/SettingsToggleIcon");
 }
