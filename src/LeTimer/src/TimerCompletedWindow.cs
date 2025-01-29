@@ -55,6 +55,8 @@ public class TimerCompletedWindow : Window
         int offsetX = 0;
         int offsetY = 0;
         DoLabels(offsetX, ref offsetY);
+        // account for big CLOSE button at the end of window
+        offsetY += (int)(Window.FooterRowHeight + GenUI.Gap);
         WindowPlus.ShrinkWindowHeightToContent(this, offsetY);
         windowRect.position = WindowPlus.MiddleScreenPos(windowRect);
     }
