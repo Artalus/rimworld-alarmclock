@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 // textures have to reside in their own static class to avoid runtime threading errors
 [StaticConstructorOnStartup]

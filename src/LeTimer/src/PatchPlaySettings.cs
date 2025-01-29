@@ -2,7 +2,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 // rimhud: [HarmonyPatch(typeof(PlaySettings), "DoPlaySettingsGlobalControls")]
 [HarmonyPatch]

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 public class TimersListController : GameComponent
 {
@@ -126,7 +126,7 @@ public class TimersListController : GameComponent
                 item.UpdateLabels(Ticker.Now, true);
             }
         },
-            "LeTimerLabelsUpdate",
+            "AlarmClockLabelsUpdate",
             doAsynchronously: false,
             exceptionHandler: null
         );

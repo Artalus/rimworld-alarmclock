@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 // TODO: inherit from Dialog_Something maybe?
 public class TimerCompletedWindow : Window

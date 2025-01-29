@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 // FIXME: use UIScaling.AdjustRectToUIScaling everywhere!
 // or it won't work for peeps with zoomed ui
