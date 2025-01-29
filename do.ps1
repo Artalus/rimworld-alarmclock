@@ -9,6 +9,7 @@ switch ($Command) {
     "junction" {}
     "dev" {}
     "release" {}
+    "publish" {}
     "vsPostBuild" {}
     "vsPreBuild" {}
     "" {
@@ -87,6 +88,15 @@ function Do_release {
 
     Move-Item "./${MOD}" "${DIR_RELEASED_MOD}"
     Write-Host "-- SUCCESS! Start RimWorld, enable Devmode, open Mod, publish to Steam"
+}
+
+function Do_publish {
+    $exe = "${PSScriptRoot}\..\uploader\RimworldModReleaseTool.exe"
+    if (!(Test-Path "$exe")) {
+        Write-Error "Missing executable ${exe}`nGet Mlie's awesome tool from https://github.com/emipa606/RimworldModdingHelpers/tree/master/SteamUpdateTool/Compiled"
+        return
+    }
+    & "${exe}" "${DIR_RELEASED_MOD}"
 }
 
 # entrypoint for csproj
