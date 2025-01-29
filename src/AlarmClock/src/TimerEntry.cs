@@ -80,10 +80,9 @@ public class TimerEntry : IExposable
     {
         DurationHours = hours;
         Completed = false;
-        var tick = Ticker.Now;
-        this.CompletesOnTick = tick + (hours * GenDate.TicksPerHour);
-        expiresOnTick = tick + EXPIRATION_TIMEOUT;
-        UpdateLabels(tick, true);
+        CompletesOnTick = Ticker.Now + (hours * GenDate.TicksPerHour);
+        expiresOnTick = CompletesOnTick + EXPIRATION_TIMEOUT;
+        UpdateLabels(Ticker.Now, true);
     }
 
     /// <summary>
