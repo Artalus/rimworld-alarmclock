@@ -25,8 +25,9 @@ if (!(Test-Path "$DIR_RIMWORLD\RimWorldWin64.exe")) {
     Write-Error "-- Mod's root should be placed under a subdirectory in SteamApps/common/RimWorld"
 }
 
-$JUNCTION_TARGET = "${DIR_RIMWORLD}\Mods\LeTimer.dev"
-$DIR_RELEASED_MOD = "${DIR_RIMWORLD}\Mods\LeTimer"
+$MOD = "AlarmClock"
+$JUNCTION_TARGET = "${DIR_RIMWORLD}\Mods\${MOD}.dev"
+$DIR_RELEASED_MOD = "${DIR_RIMWORLD}\Mods\${MOD}"
 $DIR_MOD = "${PSScriptRoot}\mod"
 
 # make the mod visible in mods directory for development
@@ -75,16 +76,16 @@ function Do_release {
     Write-Host "-- Build 'Release' config"
     & dotnet build -c Release
 
-    if (Test-Path "./LeTimer") {
+    if (Test-Path "./${MOD}") {
         Write-Host "-- Remove old release folder"
-        Remove-Item -Recurse "./LeTimer"
+        Remove-Item -Recurse "./${MOD}"
     }
-    Copy-Item -Recurse "./mod" "./LeTimer"
-    Compress-Archive "./LeTimer" -DestinationPath "LeTimer.zip" -Force
+    Copy-Item -Recurse "./mod" "./${MOD}"
+    Compress-Archive "./${MOD}" -DestinationPath "${MOD}.zip" -Force
 
     _removeInstalledMod
 
-    Move-Item "./LeTimer" "${DIR_RELEASED_MOD}"
+    Move-Item "./${MOD}" "${DIR_RELEASED_MOD}"
     Write-Host "-- SUCCESS! Start RimWorld, enable Devmode, open Mod, publish to Steam"
 }
 
