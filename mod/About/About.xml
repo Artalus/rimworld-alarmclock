@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ModMetaData>
-    <name>Timer</name>
+    <name>Alarm Clock</name>
     <author>Artalus</author>
-    <packageId>artalus.timer</packageId>
-    <description>add button to notify about stuff</description>
+    <packageId>artalus.alarmclock</packageId>
+    <description>
+    Adds interface to create and update timers basing on in-game time (ticks).
+    </description>
     <supportedVersions>
         <li>1.5</li>
         <!-- TODO: never tested those -->

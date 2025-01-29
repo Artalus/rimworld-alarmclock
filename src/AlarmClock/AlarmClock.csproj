@@ -6,8 +6,8 @@
     <ProjectGuid>{5F1D8C6D-E127-4001-A575-E56D99DF271F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LeTimer</RootNamespace>
-    <AssemblyName>LeTimer</AssemblyName>
+    <RootNamespace>AlarmClock</RootNamespace>
+    <AssemblyName>AlarmClock</AssemblyName>
     <TargetFramework>net472</TargetFramework>
     <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>

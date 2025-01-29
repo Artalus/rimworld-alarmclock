@@ -1,6 +1,6 @@
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 /// <summary>
 /// small wrapper to get game ticks, just to not mistake the 2 ingame counters

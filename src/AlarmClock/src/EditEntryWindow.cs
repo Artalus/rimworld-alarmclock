@@ -2,7 +2,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 public class EditEntryWindow : Window
 {

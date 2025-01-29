@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 public class TimerEntry : IExposable
 {

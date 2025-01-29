@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace LeTimer;
+namespace AlarmClock;
 
 /// <summary>
 /// some frequently used helpers & constants
