@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <AlarmClock.Ui.Toggle>Показывать окно таймеров</AlarmClock.Ui.Toggle>
+  <AlarmClock.WindowCompleted.Title>Время пришло!</AlarmClock.WindowCompleted.Title>
+  <AlarmClock.WindowCompleted.Duration>Длительность: {0}ч</AlarmClock.WindowCompleted.Duration>
+  <AlarmClock.WindowCompleted.Text>Текст: {0}</AlarmClock.WindowCompleted.Text>
+  <AlarmClock.WindowEdit.Description>Описание:</AlarmClock.WindowEdit.Description>
+  <AlarmClock.WindowEdit.SliderHours>Часы: </AlarmClock.WindowEdit.SliderHours>
+  <AlarmClock.WindowEdit.SliderDays>Дни: </AlarmClock.WindowEdit.SliderDays>
+  <AlarmClock.WindowEdit.WillFireAt>Сработает: в </AlarmClock.WindowEdit.WillFireAt>
+  <AlarmClock.WindowEdit.WillFireIn> / через </AlarmClock.WindowEdit.WillFireIn>
+  <AlarmClock.WindowEdit.OldValues>Старые значения: {0} / через {1} ({2})</AlarmClock.WindowEdit.OldValues>
+  <AlarmClock.WindowEdit.WarnCompleted>Время истекло; был бы удалён через </AlarmClock.WindowEdit.WarnCompleted>
+  <AlarmClock.WindowEdit.TipAdd>Добавить таймер</AlarmClock.WindowEdit.TipAdd>
+  <AlarmClock.WindowEdit.TipReset>Обновить таймер {0}</AlarmClock.WindowEdit.TipReset>
+  <AlarmClock.WindowEdit.TipInvalidDescription>Необходимо описание</AlarmClock.WindowEdit.TipInvalidDescription>
+  <AlarmClock.WindowEdit.TipInvalidDuration>Длительность должна быть больше 0ч</AlarmClock.WindowEdit.TipInvalidDuration>
+  <AlarmClock.WindowEdit.TipDelete>Удалить {0}</AlarmClock.WindowEdit.TipDelete>
+  <AlarmClock.WindowList.Title>Таймеры</AlarmClock.WindowList.Title>
+  <AlarmClock.WindowList.TipDrag>Перетащить окно</AlarmClock.WindowList.TipDrag>
+  <AlarmClock.WindowList.TipAdd>Добавить таймер</AlarmClock.WindowList.TipAdd>
+</LanguageData>
