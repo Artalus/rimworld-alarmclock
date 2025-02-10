@@ -66,15 +66,15 @@ public class TimerCompletedWindow : Window
         int x = offsetX + 10;
         Text.Font = GameFont.Medium;
         var r = new Rect(x, offsetY, windowRect.width, 30);
-        Widgets.Label(r, "Time's up!");
+        Widgets.Label(r, "AlarmClock.WindowCompleted.Title".Translate());
         offsetY += 30;
 
         Text.Font = GameFont.Small;
         r = new Rect(offsetX, offsetY, windowRect.width, 20);
-        Widgets.Label(r, $"Duration: {timerDuration}h");
+        Widgets.Label(r, "AlarmClock.WindowCompleted.Duration".Translate(timerDuration));
         offsetY += 20;
 
         r = new Rect(offsetX, offsetY, windowRect.width, 40);
-        Widgets.Label(r, $"Text: {timerDesc}");
+        Widgets.Label(r, "AlarmClock.WindowCompleted.Text".Translate(timerDesc));
     }
 }

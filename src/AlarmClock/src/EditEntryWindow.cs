@@ -95,7 +95,7 @@ public class EditEntryWindow : Window
     private void HandleControls(ref int offsetY)
     {
         Rect r = new Rect(0, offsetY, windowRect.width, WindowPlus.LABEL_HEIGHT_SM);
-        Widgets.Label(r, "Description:");
+        Widgets.Label(r, "AlarmClock.WindowEdit.Description".Translate());
         offsetY += WindowPlus.LABEL_HEIGHT_SM;
 
         float availableWidth = WindowPlus.AvailableWidth(this);
@@ -109,11 +109,17 @@ public class EditEntryWindow : Window
 
         float x = 0;
         var date = (string x) => x.Colorize(ColoredText.DateTimeColor);
+        // NOTE: 0. `string.Translate()` returns a `TaggedString`
+        // 1. `TaggedString` + `string` => `TaggedString`
+        // 2. `HorizontalSlider()` accepts regular `string`s, unlike `Label()` and others
+        // 3. (cast)ing `TaggedString` to `string` strips any tags from it
+        // So need to use `.RawText` to keep coloring in slider labels
         Widgets.HorizontalSlider(
             new Rect(x, offsetY, hoursWidth, 50),
             ref _durationHours,
             new FloatRange(0, GenDate.HoursPerDay),
-            "Hours: " + date(_durationHours.ToString()),
+            "AlarmClock.WindowEdit.SliderHours".Translate().RawText
+                + date(_durationHours.ToString()),
             roundTo: 1
         );
         x += hoursWidth + slidersGap / 2;
@@ -123,7 +129,8 @@ public class EditEntryWindow : Window
             new Rect(x, offsetY, daysWidth, 50),
             ref _durationDays,
             new FloatRange(0, GenDate.DaysPerYear),
-            "Days: " + date(_durationDays.ToString()),
+            "AlarmClock.WindowEdit.SliderDays".Translate().RawText
+                + date(_durationDays.ToString()),
             roundTo: 1
         );
         x = 0;
@@ -146,8 +153,10 @@ public class EditEntryWindow : Window
 
         Widgets.Label(
             new Rect(0, offsetY, windowRect.width, WindowPlus.LABEL_HEIGHT_SM),
-            gray("Will fire: at ") + date(firesAt) + gray(" / in ")
-            + date($"{firesIn} ({firesInTicks} ticks)")
+            gray("AlarmClock.WindowEdit.WillFireAt".Translate())
+                + date(firesAt)
+                + gray("AlarmClock.WindowEdit.WillFireIn".Translate())
+                + date($"{firesIn} ({firesInTicks} ticks)")
         );
         offsetY += WindowPlus.LABEL_HEIGHT_SM;
 
@@ -158,7 +167,7 @@ public class EditEntryWindow : Window
             int oldTicks = Target.CompletesOnTick - Ticker.Now;
             Widgets.Label(
                 new Rect(0, offsetY, windowRect.width, WindowPlus.LABEL_HEIGHT_SM),
-                gray($"Old values: at {oldAt} / in {oldIn} ({oldTicks})")
+                gray("AlarmClock.WindowEdit.OldValues".Translate(oldAt, oldIn, oldTicks))
             );
             offsetY += WindowPlus.LABEL_HEIGHT_SM;
 
@@ -166,8 +175,8 @@ public class EditEntryWindow : Window
             {
                 Widgets.Label(
                     new Rect(0, offsetY, windowRect.width, WindowPlus.LABEL_HEIGHT_SM),
-                    warn("Completed timer; would have been removed in ")
-                    + date(Target.LabelExpiresIn)
+                    warn("AlarmClock.WindowEdit.WarnCompleted".Translate())
+                        + date(Target.LabelExpiresIn)
                 );
                 offsetY += WindowPlus.LABEL_HEIGHT_SM;
             }
@@ -178,21 +187,18 @@ public class EditEntryWindow : Window
     {
         float availableWidth = WindowPlus.AvailableWidth(this);
 
-        string timerName = Target == null
-            ? "new timer"
-            : $"timer '{Target.Description.Truncate(100)}'"
-            ;
+        string timerName = Target?.Description.Truncate(100) ?? "";
         string validationTooltip = Target == null
-            ? $"Add {timerName}"
-            : $"Reset {timerName}"
+            ? "AlarmClock.WindowEdit.TipAdd".Translate()
+            : "AlarmClock.WindowEdit.TipReset".Translate(timerName)
             ;
 
         bool inputValid = entrySubstitute.Description.Length > 0
             && entrySubstitute.DurationHours > 0;
         if (entrySubstitute.Description.Length <= 0)
-            validationTooltip = "Needs description";
+            validationTooltip = "AlarmClock.WindowEdit.TipInvalidDescription".Translate();
         if (entrySubstitute.DurationHours <= 0)
-            validationTooltip = "Duration must be greater than 0h";
+            validationTooltip = "AlarmClock.WindowEdit.TipInvalidDuration".Translate();
 
         Color mainColor = inputValid ? Color.white : Widgets.InactiveColor;
         Color mouseoverColor = inputValid ? GenUI.MouseoverColor : Widgets.InactiveColor;
@@ -208,7 +214,7 @@ public class EditEntryWindow : Window
                 new Rect(x, y, GenUI.SmallIconSize, GenUI.SmallIconSize),
                 TexButton.Delete,
                 Color.white,
-                tooltip: $"Delete {timerName}"
+                tooltip: "AlarmClock.WindowEdit.TipDelete".Translate(timerName)
             );
             if (deletePressed)
             {

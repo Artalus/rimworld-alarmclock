@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <AlarmClock.Ui.Toggle>Toggle timers window</AlarmClock.Ui.Toggle>
+  <AlarmClock.WindowCompleted.Title>Time's up!</AlarmClock.WindowCompleted.Title>
+  <AlarmClock.WindowCompleted.Duration>Duration: {0}h</AlarmClock.WindowCompleted.Duration>
+  <AlarmClock.WindowCompleted.Text>Text: {0}</AlarmClock.WindowCompleted.Text>
+  <AlarmClock.WindowEdit.Description>Description:</AlarmClock.WindowEdit.Description>
+  <AlarmClock.WindowEdit.SliderHours>Hours: </AlarmClock.WindowEdit.SliderHours>
+  <AlarmClock.WindowEdit.SliderDays>Days: </AlarmClock.WindowEdit.SliderDays>
+  <AlarmClock.WindowEdit.WillFireAt>Will fire: at </AlarmClock.WindowEdit.WillFireAt>
+  <AlarmClock.WindowEdit.WillFireIn> / in </AlarmClock.WindowEdit.WillFireIn>
+  <AlarmClock.WindowEdit.OldValues>Old values: at {0} / in {1} ({2})</AlarmClock.WindowEdit.OldValues>
+  <AlarmClock.WindowEdit.WarnCompleted>Completed timer; would have been removed in </AlarmClock.WindowEdit.WarnCompleted>
+  <AlarmClock.WindowEdit.TipAdd>Add new timer</AlarmClock.WindowEdit.TipAdd>
+  <AlarmClock.WindowEdit.TipReset>Reset timer {0}</AlarmClock.WindowEdit.TipReset>
+  <AlarmClock.WindowEdit.TipInvalidDescription>Needs description</AlarmClock.WindowEdit.TipInvalidDescription>
+  <AlarmClock.WindowEdit.TipInvalidDuration>Duration must be greater than 0h</AlarmClock.WindowEdit.TipInvalidDuration>
+  <AlarmClock.WindowEdit.TipDelete>Delete {0}</AlarmClock.WindowEdit.TipDelete>
+  <AlarmClock.WindowList.Title>Timers</AlarmClock.WindowList.Title>
+  <AlarmClock.WindowList.TipDrag>Drag the window</AlarmClock.WindowList.TipDrag>
+  <AlarmClock.WindowList.TipAdd>Add new timer</AlarmClock.WindowList.TipAdd>
+</LanguageData>

@@ -100,12 +100,12 @@ public class TimersListWindow : Window
         float x = 0;
         // draw anchor for easier dragging
         var dragRect = new Rect(x, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
-        TooltipHandler.TipRegion(dragRect, "Drag the window");
+        TooltipHandler.TipRegion(dragRect, "AlarmClock.WindowList.TipDrag".Translate());
         GUI.DrawTexture(dragRect, TexturesPlus.DragHandle);
 
         x += GenUI.SmallIconSize;
         var btnRect = new Rect(x, offsetY, GenUI.SmallIconSize, GenUI.SmallIconSize);
-        if (Widgets.ButtonImage(btnRect, TexButton.Add, Color.white, tooltip: "Add new timer"))
+        if (Widgets.ButtonImage(btnRect, TexButton.Add, Color.white, tooltip: "AlarmClock.WindowList.TipAdd".Translate()))
         {
             Find.WindowStack.Add(new EditEntryWindow(controller, null));
         }
@@ -113,7 +113,7 @@ public class TimersListWindow : Window
         x += 8 + GenUI.SmallIconSize;
         int w = WindowPlus.AvailableWidth(this, (int)x);
         var lblRect = new Rect(x, offsetY, w, WindowPlus.LABEL_HEIGHT_SM);
-        Widgets.Label(lblRect, "Timers");
+        Widgets.Label(lblRect, "AlarmClock.WindowList.Title".Translate());
 
         offsetY += (int)GenUI.SmallIconSize;
     }
