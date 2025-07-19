@@ -5,10 +5,9 @@
     <packageId>artalus.alarmclock</packageId>
     <description>
 Adds interface to create and update timers basing on in-game time (ticks).
-
-description updated
     </description>
     <supportedVersions>
+        <li>1.6</li>
         <li>1.5</li>
         <!-- TODO: never tested those -->
         <!-- <li>1.4</li>

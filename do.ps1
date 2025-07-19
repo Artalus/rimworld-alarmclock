@@ -10,8 +10,6 @@ switch ($Command) {
     "dev" {}
     "release" {}
     "publish" {}
-    "vsPostBuild" {}
-    "vsPreBuild" {}
     "" {
         Write-Host "USAGE: ./do.ps1 <junction|release>"
         return
@@ -64,7 +62,8 @@ function Do_dev {
     _removeInstalledMod
     Do_junction
     Write-Host "-- Build 'Release' config"
-    & dotnet build -c Release
+    & dotnet build -c Release /p:RimVersion=1.6
+    & dotnet build -c Release /p:RimVersion=1.5
     & ${env:RIMWORLD}
 }
 
@@ -75,7 +74,8 @@ function Do_release {
 
     _gitEnsureEverythingCommitted
     Write-Host "-- Build 'Release' config"
-    & dotnet build -c Release
+    & dotnet build -c Release /p:RimVersion=1.6
+    & dotnet build -c Release /p:RimVersion=1.5
 
     if (Test-Path "./${MOD}") {
         Write-Host "-- Remove old release folder"
@@ -97,19 +97,6 @@ function Do_publish {
         return
     }
     & "${exe}" "${DIR_RELEASED_MOD}"
-}
-
-# entrypoint for csproj
-function Do_vsPostBuild {
-    $to = "${DIR_MOD}\Assemblies\"
-    Write-Host ".NET postBuild copy:"
-    Write-Host $Arg
-    Write-Host "->"
-    Write-Host $to
-    if (!(Test-Path "${to}")) {
-        New-Item -ItemType Directory "${to}"
-    }
-    Copy-Item -Path "${Arg}" -Destination "${DIR_MOD}\Assemblies\"
 }
 
 function _unjunction {
